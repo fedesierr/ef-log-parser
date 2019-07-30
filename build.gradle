@@ -25,6 +25,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-batch")
     implementation('net.sf.jopt-simple:jopt-simple:5.0')
     implementation("mysql:mysql-connector-java")
+    implementation("org.apache.commons:commons-lang3")
+    implementation("me.tongfei:progressbar:0.7.4")
 
     compileOnly('org.projectlombok:lombok:1.18.8')
     annotationProcessor('org.projectlombok:lombok:1.18.8')

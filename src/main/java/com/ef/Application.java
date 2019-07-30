@@ -19,8 +19,6 @@ import java.util.Arrays;
 @SpringBootApplication
 public class Application {
 
-
-
     public static void main(String[] args) throws Exception{
 
         OptionParser parser = optionParser();
@@ -36,6 +34,7 @@ public class Application {
             AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
             ctx.getEnvironment().getPropertySources().addFirst(jOptSource);
             ctx.refresh();
+            System.out.println("Use access log file: " + ctx.getEnvironment().getProperty("accesslog"));
         } catch (OptionException e) {
             parser.printHelpOn(System.out);
             return;
@@ -49,10 +48,11 @@ public class Application {
 
     private static OptionParser optionParser() {
 
-        OptionParser parser = new OptionParser() {
+        return new OptionParser() {
             {
                 accepts("startDate", "start date in \"yyyy-MM-dd.HH:mm:ss\" format")
-                        .withRequiredArg().required();
+                        .withRequiredArg()
+                        .required();
 
                 accepts("duration", "duration \"hourly\", \"daily\" as inputs")
                         .withRequiredArg().ofType(Duration.class).required();
@@ -60,14 +60,14 @@ public class Application {
                 accepts("threshold", "threshold int value")
                         .withRequiredArg().ofType(Integer.class).required();
 
-                accepts("accesslog", "path to access log file");
+                accepts("accesslog", "path to access log file")
+                        .withRequiredArg().required();
 
                 acceptsAll(Arrays.asList("help", "h", "?"), "show help").forHelp();
 
                 formatHelpWith(new BuiltinHelpFormatter(120, 2));
             }
         };
-        return parser;
     }
 
 }

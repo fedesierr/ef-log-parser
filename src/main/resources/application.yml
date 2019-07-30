@@ -2,20 +2,17 @@ debug: false
 
 spring:
   profiles.active: default
+  batch:
+    initialize-schema: always
+  datasource:
+    initialization-mode: always
 
 ---
 spring:
   profiles: default
 
   datasource:
-    url: jdbc:mysql://localhost:3306/logs
+    url: jdbc:mysql://localhost:3306/ef_parser
     username: logs
     password: logs
-
-  jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
-  # Log queries
-#  jpa.properties.hibernate.show_sql: true
-#  jpa.properties.hibernate.use_sql_comments: true
-#  jpa.properties.hibernate.format_sql: true
 
