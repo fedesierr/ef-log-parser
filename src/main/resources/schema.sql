@@ -19,5 +19,6 @@ drop table if exists detected_ips;
 CREATE TABLE IF NOT EXISTS detected_ips (
     id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     ip VARCHAR(45) NOT NULL,
+    total INT(10) NOT NULL,
     reason VARCHAR(255) NOT NULL
 );

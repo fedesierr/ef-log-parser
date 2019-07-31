@@ -62,7 +62,11 @@ public class BatchConfiguration {
     @Bean
     public Long lineCount() throws IOException {
         Path path = Paths.get(this.accessLog);
-        return Files.lines(path).count();
+        if(Files.exists(path)) {
+            return Files.lines(path).count();
+        }
+
+        return 0L;
     }
 
     @Bean

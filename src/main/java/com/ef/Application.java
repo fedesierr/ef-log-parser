@@ -11,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.JOptCommandLinePropertySource;
 
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.TimeZone;
 
 /**
  * @author fsierra on 2019-07-28
@@ -34,6 +36,7 @@ public class Application {
             AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
             ctx.getEnvironment().getPropertySources().addFirst(jOptSource);
             ctx.refresh();
+
             System.out.println("Use access log file: " + ctx.getEnvironment().getProperty("accesslog"));
         } catch (OptionException e) {
             parser.printHelpOn(System.out);
@@ -45,6 +48,11 @@ public class Application {
         app.run(args);
     }
 
+    @PostConstruct
+    public void init(){
+        // Setting Spring Boot SetTimeZone
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+    }
 
     private static OptionParser optionParser() {
 

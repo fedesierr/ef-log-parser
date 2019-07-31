@@ -14,5 +14,7 @@ public class DetectedIp {
 
     private String ip;
 
+    private Integer total;
+
     private String reason;
 }
